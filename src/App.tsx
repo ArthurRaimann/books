@@ -22,12 +22,12 @@ function App() {
       }
       return book;
     });
-    setBooks([...newBookList]);
+    setBooks(newBookList);
   };
 
   const handleDelete = (bookId: any) => {
     const newBookList = books.filter((book) => book.id !== bookId);
-    setBooks([...newBookList]);
+    setBooks(newBookList);
   };
 
   return (
