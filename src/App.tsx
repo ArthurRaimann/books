@@ -6,7 +6,6 @@ function App() {
   const [books, setBooks] = useState([]);
 
   const createBook = (title: string) => {
-    console.log(title);
     const newBook = {
       id: Math.random(),
       title,
@@ -18,7 +17,7 @@ function App() {
   const onSubmitEdit = (editedBook: any) => {
     const newBookList = books.map((book) => {
       if (book.id === editedBook.id) {
-        return { id: book.id, title: editedBook.title };
+        return { ...book, title: editedBook.title };
       }
       return book;
     });

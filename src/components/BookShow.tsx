@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import BookEdit from './BookEdit';
 
 function BookShow({ book, onSubmitEdit, handleDelete }: any) {
   const [edit, setEdit] = useState(false);
@@ -29,11 +30,11 @@ function BookShow({ book, onSubmitEdit, handleDelete }: any) {
       <button onClick={onDelete}>Delete</button>
       <h3>Title: {book.title}</h3>
       {edit && (
-        <div>
-          <form onSubmit={handleSubmit}>
-            <input value={editedTitle} onChange={handleChange} />
-          </form>
-        </div>
+        <BookEdit
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          editedTitle={editedTitle}
+        />
       )}
     </div>
   );

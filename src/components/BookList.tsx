@@ -13,7 +13,7 @@ function BookList({ books, onSubmitEdit, handleDelete }: any) {
   });
   console.log('showBooksList', showBooksList);
 
-  return <div>New List {showBooksList}</div>;
+  return <div>{showBooksList}</div>;
 }
 
 export default BookList;
