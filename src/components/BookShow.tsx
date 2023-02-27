@@ -3,9 +3,9 @@ import BookEdit from './BookEdit';
 
 function BookShow({ book, onSubmitEdit, handleDelete }: any) {
   const [edit, setEdit] = useState(false);
-  const [editedTitle, setEditTitle] = useState('');
 
-  const handleEdit = () => {
+  const handleEdit = (book: any) => {
+    onSubmitEdit({id: book.id, title: book.title})
     setEdit(!edit);
   };
 
@@ -13,29 +13,21 @@ function BookShow({ book, onSubmitEdit, handleDelete }: any) {
     handleDelete(book.id);
   };
 
-  const handleChange = (event: any) => {
-    setEditTitle(event.target.value);
-  };
-
-  const handleSubmit = (event: any) => {
-    event.preventDefault();
-    onSubmitEdit({ id: book.id, title: editedTitle });
-    handleEdit();
-    setEditTitle('');
-  };
-
+ 
   return (
-    <div style={{ border: '1px solid black', width: '200px' }}>
-      <button onClick={handleEdit}>Edit</button>
-      <button onClick={onDelete}>Delete</button>
-      <h3>Title: {book.title}</h3>
-      {edit && (
+    <div className='book-show'>
+      <img alt='books' src='https://picsum.photos/300/200' />
+      {edit ? (
         <BookEdit
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          editedTitle={editedTitle}
+          handleEdit={handleEdit}
+          book={book}
         />
-      )}
+      ): (<h3>{book.title}</h3>)}
+      <div className='actions'>
+        <button className='edit' onClick={handleEdit}>Edit</button>
+        <button className='delete' onClick={onDelete}>Delete</button>
+      </div>
+      
     </div>
   );
 }

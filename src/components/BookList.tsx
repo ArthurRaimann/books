@@ -11,9 +11,8 @@ function BookList({ books, onSubmitEdit, handleDelete }: any) {
       />
     );
   });
-  console.log('showBooksList', showBooksList);
 
-  return <div>{showBooksList}</div>;
+  return <div className='book-list'>{showBooksList}</div>;
 }
 
 export default BookList;

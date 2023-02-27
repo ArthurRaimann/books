@@ -7,10 +7,10 @@ function App() {
 
   const createBook = (title: string) => {
     const newBook = {
-      id: Math.random(),
+      id: Math.round(Math.random()*9999 + Math.random()*77),
       title,
     };
-
+    
     setBooks([...books, newBook]);
   };
 
@@ -30,7 +30,8 @@ function App() {
   };
 
   return (
-    <div>
+    <div className='app'>
+      <h1>Reading List</h1>
       <BookList
         books={books}
         onSubmitEdit={onSubmitEdit}
