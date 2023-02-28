@@ -1,18 +1,18 @@
 import BookShow from './BookShow';
 
-function BookList({ books, onSubmitEdit, handleDelete }: any) {
+function BookList({ books, onEditBook, onDeleteBook }: any) {
   const showBooksList = books.map((book: any) => {
     return (
       <BookShow
         key={book.id}
         book={book}
-        onSubmitEdit={onSubmitEdit}
-        handleDelete={handleDelete}
+        onEditBook={onEditBook}
+        onDeleteBook={onDeleteBook}
       />
     );
   });
 
-  return <div className='book-list'>{showBooksList}</div>;
+  return <div className="book-list">{showBooksList}</div>;
 }
 
 export default BookList;

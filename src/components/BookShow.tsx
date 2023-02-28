@@ -1,33 +1,34 @@
 import { useState } from 'react';
 import BookEdit from './BookEdit';
 
-function BookShow({ book, onSubmitEdit, handleDelete }: any) {
-  const [edit, setEdit] = useState(false);
+function BookShow({ book, onEditBook, onDeleteBook }: any) {
+  const [edit, setEdit] = useState<boolean>(false);
 
-  const handleEdit = (book: any) => {
-    onSubmitEdit({id: book.id, title: book.title})
+  const handleEditClick = (book: any) => {
+    onEditBook({ id: book.id, title: book.title });
     setEdit(!edit);
   };
 
-  const onDelete = () => {
-    handleDelete(book.id);
+  const handleDeleteClick = () => {
+    onDeleteBook(book.id);
   };
 
- 
   return (
-    <div className='book-show'>
-      <img alt='books' src={`https://picsum.photos/seed/${book.id}/300/200`} />
+    <div className="book-show">
+      <img alt="books" src={`https://picsum.photos/seed/${book.id}/300/200`} />
       {edit ? (
-        <BookEdit
-          handleEdit={handleEdit}
-          book={book}
-        />
-      ): (<h3>{book.title}</h3>)}
-      <div className='actions'>
-        <button className='edit' onClick={handleEdit}>Edit</button>
-        <button className='delete' onClick={onDelete}>Delete</button>
+        <BookEdit handleEdit={handleEditClick} book={book} />
+      ) : (
+        <h3>{book.title}</h3>
+      )}
+      <div className="actions">
+        <button className="edit" onClick={handleEditClick}>
+          Edit
+        </button>
+        <button className="delete" onClick={handleDeleteClick}>
+          Delete
+        </button>
       </div>
-      
     </div>
   );
 }
