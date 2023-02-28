@@ -19,6 +19,10 @@ function App() {
     setBooks(response.data);
   };
 
+  useEffect(()=>{
+    fetchBooks()
+  },[])
+
   const createBook = async (title: string) => {
     const response: AxiosResponse = await axios.post(
       'http://localhost:3001/books',
