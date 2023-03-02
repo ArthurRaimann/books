@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import BooksContext from '../context/books';
-import { Book, BookShowTypes } from '../models/models';
+import { BookShowTypes } from '../models/models';
 import BookEdit from './BookEdit';
 
 function BookShow({ book }: BookShowTypes) {
