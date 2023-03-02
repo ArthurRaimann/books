@@ -1,28 +1,67 @@
+import axios, { AxiosResponse } from 'axios';
 import { createContext, useState } from 'react';
-
-interface IncrementCountFunc {
-  (): void;
-}
-interface BooksContextType {
-  count: number;
-  incrementCount: IncrementCountFunc;
-}
+import { Book, BooksContextType } from '../models/models';
 
 const BooksContext = createContext<BooksContextType>({
-  count: 0,
-  incrementCount: () => {},
+  books: [{ id: 0, title: '' }],
+  fetchBooks: () => {},
+  createBook: () => {},
+  editBookById: () => {},
+  deleteBookById: () => {},
 });
 
 function Provider({ children }: any) {
-  const [count, setCount] = useState(5);
+  const [books, setBooks] = useState<Book[]>([]);
 
-  const incrementCount = () => {
-    setCount(count + 1);
+  const fetchBooks = async () => {
+    const response: AxiosResponse = await axios.get(
+      'http://localhost:3001/books'
+    );
+
+    setBooks(response.data);
+  };
+
+  const createBook = async (title: string) => {
+    const response: AxiosResponse = await axios.post(
+      'http://localhost:3001/books',
+      {
+        title,
+      }
+    );
+
+    setBooks([...books, response.data]);
+  };
+
+  const editBookById = async (editedBook: Book) => {
+    const response = await axios.put(
+      `http://localhost:3001/books/${editedBook.id}`,
+      {
+        title: editedBook.title,
+      }
+    );
+
+    const newBookList: Book[] = books.map((book) => {
+      if (book.id === response.data.id) {
+        return { ...book, ...response.data };
+      }
+      return book;
+    });
+    setBooks(newBookList);
+  };
+
+  const deleteBookById = async (bookId: number) => {
+    await axios.delete(`http://localhost:3001/books/${bookId}`);
+
+    const newBookList = books.filter((book) => book.id !== bookId);
+    setBooks(newBookList);
   };
 
   const valueToShare = {
-    count,
-    incrementCount,
+    books,
+    fetchBooks,
+    createBook,
+    editBookById,
+    deleteBookById,
   };
 
   return (
