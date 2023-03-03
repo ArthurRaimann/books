@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { createContext, useState } from 'react';
+import { createContext, useCallback, useState } from 'react';
 import { Book, BooksContextType } from '../models/models';
 
 const BooksContext = createContext<BooksContextType>({
@@ -13,13 +13,13 @@ const BooksContext = createContext<BooksContextType>({
 function Provider({ children }: any) {
   const [books, setBooks] = useState<Book[]>([]);
 
-  const fetchBooks = async () => {
+  const fetchBooks = useCallback(async () => {
     const response: AxiosResponse = await axios.get(
       'http://localhost:3001/books'
     );
 
     setBooks(response.data);
-  };
+  }, []);
 
   const createBook = async (title: string) => {
     const response: AxiosResponse = await axios.post(

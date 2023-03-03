@@ -8,7 +8,7 @@ function BookShow({ book }: BookShowTypes) {
 
   const { deleteBookById } = useContext(BooksContext);
 
-  const handleEditClick = (book: any) => {
+  const handleEditClick = () => {
     setEdit(!edit);
   };
 
