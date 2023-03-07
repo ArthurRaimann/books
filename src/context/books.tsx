@@ -23,7 +23,7 @@ function Provider({ children }: any) {
 
   const createBook = async (title: string) => {
     const response: AxiosResponse = await axios.post(
-      'http://localhost:3001/books',
+      'https://my-json-server.typicode.com/ArthurRaimann/booksDB/books',
       {
         title,
       }
@@ -34,7 +34,7 @@ function Provider({ children }: any) {
 
   const editBookById = async (editedBook: Book) => {
     const response = await axios.put(
-      `http://localhost:3001/books/${editedBook.id}`,
+      `https://my-json-server.typicode.com/ArthurRaimann/booksDB/books/${editedBook.id}`,
       {
         title: editedBook.title,
       }
@@ -50,7 +50,7 @@ function Provider({ children }: any) {
   };
 
   const deleteBookById = async (bookId: number) => {
-    await axios.delete(`http://localhost:3001/books/${bookId}`);
+    await axios.delete(`https://my-json-server.typicode.com/ArthurRaimann/booksDB/books/${bookId}`);
 
     const newBookList = books.filter((book) => book.id !== bookId);
     setBooks(newBookList);
