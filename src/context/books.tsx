@@ -15,7 +15,7 @@ function Provider({ children }: any) {
 
   const fetchBooks = useCallback(async () => {
     const response: AxiosResponse = await axios.get(
-      'https://arthurraimann.github.io/booksDB/'
+      'https://my-json-server.typicode.com/ArthurRaimann/booksDB'
     );
 
     setBooks(response.data);
